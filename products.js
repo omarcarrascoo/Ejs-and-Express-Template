@@ -24,9 +24,20 @@ class Contenedor {
     }
   }
 
+  async randomGet(){
+    const contenidoArchivo = await this.#leerUnArchivo();
+    const randomItem = contenidoArchivo[Math.floor(Math.random()*contenidoArchivo.length)]
+    console.log (randomItem)
+    return randomItem
+    
+
+  }
   async getAll(){
     const contenidoArchivo = await this.#leerUnArchivo()
     console.log(contenidoArchivo)
+    return contenidoArchivo;
+    // return this.contenidoParseado
+    // console.log(this.contenidoParseado)
   }
 
   async getById(id){
@@ -50,21 +61,16 @@ class Contenedor {
     }else{
       console.log("No se encontro el producto")
     }
-    
+ 
   }
-
   async delateAll (){
     await fs.promises.unlink(this.rutaArchivo)
   }
-
 }
-const contenedor = new Contenedor('./productos.txt')
-contenedor.save({producto: 'Cafe', precio: 100 })
-contenedor.getById(3)
-contenedor.getAll()
+
+// contenedor.save({producto: 'Cahoa', precio: 100 })
+// contenedor.getById(3)
+// contenedor.getAll()
 // contenedor.delateById(3)
 // contenedor.delateAll()
-
-
-
-
+module.exports = Contenedor;
