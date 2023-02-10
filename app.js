@@ -2,12 +2,21 @@ const express = require("express");
 // const path = require("path");
 const Contenedor = require("./products");
 const app = express();
-
+const path = require('path')
+const engine = require('ejs-mate')
 
 const products = new Contenedor('./productos.txt')
-// app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/index.html"));
-// });
+
+app.set('views', path.join(__dirname, 'views') )
+app.engine('ejs', engine);
+app.set('view engine', 'ejs')
+
+app.get("/", (req, res) => {
+    res.render('index');
+});
+app.get("/signup", (req, res) => {
+    res.render('signup');
+});
 
 app.get("/productos", (req, res) =>{
     
